@@ -1,7 +1,3 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/springframework/Controller.java to edit this template
- */
 package com.CarWashGrupo6.controller;
 
 import com.CarWashGrupo6.domain.Cliente;
@@ -18,10 +14,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
-/**
- *
- * @author Vivian
- */
+
 @Controller
 @RequestMapping("/cliente")
 public class ClienteController {
@@ -76,10 +69,10 @@ public class ClienteController {
     }
 
     //
-    //  @GetMapping("/modificar/{idCliente}")
-    //   public String clienteModificar(Cliente cliente, Model model) {
-    //      cliente = clienteService.getCliente(cliente);
-    //      model.addAttribute("cliente", cliente);
-    //      return "/cliente/modifica";
-    //  }
+    @GetMapping("/modificar/{idCliente}")
+    public String clienteModificar(Cliente cliente, Model model) {
+    cliente = clienteService.getCliente(cliente);
+    model.addAttribute("cliente", cliente);
+    return "/cliente/modifica";
+    }
 }

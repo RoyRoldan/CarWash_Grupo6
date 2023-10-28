@@ -46,32 +46,58 @@
                         <div class="modal-body">
                             <div class="mb-3">
                                 <label for="nombre">[[#{cliente.nombre}]]</label>
-                                <input type="text" class="form-control" name="nombre" required="true" placeholder="Digite nombre del cliente" style ="background-color: lightblue"/>
+                                <input type="text" 
+                                       class="form-control" 
+                                       name="nombre" 
+                                       required="true" 
+                                       placeholder="Digite nombre del cliente" 
+                                       style ="background-color: lightblue"/>
                             </div>
                             <div class="mb-3">
                                 <label for="apellidos">[[#{apellidos.cliente}]]</label>
-                                <input type="text" class="form-control" name="apellidos" required="true" placeholder="Digite el apellido del cliente"  style ="background-color: lightblue"/>
+                                <input type="text" 
+                                       class="form-control" 
+                                       name="apellidos" 
+                                       required="true" 
+                                       placeholder="Digite el apellido del cliente"  
+                                       style ="background-color: lightblue"/>
                             </div> 
                             <div class="mb-3">
                                 <label for="correo">[[#{correo.cliente}]]</label>
-                                <input type="text" class="form-control" name="correo" required="true" placeholder="Digite el correo electronico" style ="background-color: lightblue"/>
+                                <input type="text" 
+                                       class="form-control" 
+                                       name="correo" 
+                                       required="true" 
+                                       placeholder="Digite el correo electronico" 
+                                       style ="background-color: lightblue"/>
                             </div>
                             <div class="mb-3">
                                 <label for="telefono">[[#{telefono.cliente}]]</label>
-                                <input type="int" class="form-control" name="telefono" required="true" placeholder="Digite el numero de telefono" style ="background-color: lightblue"/>
+                                <input type="int" 
+                                       class="form-control" 
+                                       name="telefono" 
+                                       required="true" 
+                                       />
                             </div>
                             <div class="mb-3">
                                 <label for="activo">[[#{cliente.activo}]]</label>
-                                <input class="form-check-input" type="checkbox" name="activo" id="activo" style ="background-color: lightblue" checked/>
+                                <input class="form-check-input" 
+                                       type="checkbox" 
+                                       name="activo" 
+                                       id="activo" 
+                                       style ="background-color: lightblue" checked/>
                             </div>
                             <div class="mb-3">
                                 <label for="imagen">[[#{registro.rutaImagen}]]</label>
-                                <input class="form-control" type="file" name="imagenFile" onchange="readURL(this);" style ="background-color: lightblue"/>
+                                <input class="form-control" 
+                                       type="file" 
+                                       name="imagenFile" 
+                                       onchange="readURL(this);" style ="background-color: lightblue"/>
                                 <img id="blah" src="#" alt="your image" height="200"/>
                             </div>
                         </div>
-                        <div class="modal-footer">
-                            <button class="btn btn-success bg-dark text-white" type="submit">Guardar</button>
+                        <div class="modal-footer"placeholder="Digite el numero de telefono" > 
+                            <button class="btn btn-success bg-dark text-white" type="submit">Confirmar</button>
                         </div>
                     </form>
                 </div>
@@ -93,6 +119,9 @@
                                 <thead class="table-dark">
                                     <tr><th>#</th>
                                         <th>[[#{cliente.nombre}]]</th>
+                                        <th>[[#{apellidos.cliente}]]</th>
+                                        <th>[[#{correo.cliente}]]</th>
+                                        <th>[[#{telefono.cliente}]]</th>
                                         <th>[[#{cliente.activo}]]</th>
                                         <th></th></tr>
                                 </thead>
@@ -100,7 +129,11 @@
                                     <tr th:each="cliente, contador : ${clientes}">
                                         <td>[[${contador.count}]]</td>
                                         <td>[[${cliente.nombre}]]</td>
+                                        <td>[[${cliente.apellidos}]]</td>
+                                        <td>[[${cliente.correo}]]</td>
+                                        <td>[[${cliente.telefono}]]</td>
                                         <td th:text="${cliente.activo} ? 'Activa' : 'Inactiva'" />
+
                                         <td><a th:href="@{/cliente/eliminar/}+${cliente.idCliente}"
                                                class="btn btn-danger">
                                                 <i class="fas fa-trash"></i> [[#{accion.eliminar}]]</a>
@@ -129,7 +162,117 @@
 
 
     <!-- AGREGAR EL >> 4 Fragmento que se utiliza en la página modifca.html -->
+    <section th:fragment="editarCliente">
+        <div class="row">
+            <div class="col-md-2"></div>
+            <div class="col-md-8">
+                <form method="POST"
+                      th:action="@{/cliente/guardar}" 
+                      th:object="${cliente}"
+                      class="was-validated"                          
+                      enctype="multipart/form-data">
+                    <input type="hidden" name="idCliente" th:field="*{idCliente}"/>
+                    <input type="hidden" name="rutaImagen" th:field="*{rutaImagen}"/>
+                    <section th:replace="~{cliente/manejoCliente :: botonesEditar}"/>
+                    <div id=details>
+                        <div class="container">
+                            <div class="row">
+                                <div class="col">
+                                    <div class="card">
+                                        <div class="card-header bg-primary text-white mb-3">
+                                            <h4>[[#{accion.actualizar}]]</h4>
+                                        </div>
+                                        <div class="card-body">
+                                            <div class="mb-3">
+                                                <label for="nombre">[[#{cliente.nombre}]]</label>
+                                                <input type="text" 
+                                                       class="form-control" 
+                                                       name="nombre" 
+                                                       th:field="*{nombre}"
+                                                       required="true"
+                                                       placeholder="Digite nombre del cliente" 
+                                                       style ="background-color: lightblue">
+                                            </div>
+
+                                            <div class="mb-3">
+                                                <label for="apellidos">[[#{apellidos.cliente}]]</label>
+                                                <input type="text" 
+                                                       class="form-control" 
+                                                       name="apellidos" 
+                                                       th:field="*{apellidos}"
+                                                       required="true"
+                                                       placeholder="Digite el apellido del cliente"  
+                                                       style ="background-color: lightblue">
+                                            </div>
+                                            <div class="mb-3">
+                                                <label for="correo">[[#{correo.cliente}]]</label>
+                                                <input type="text" 
+                                                       class="form-control" 
+                                                       name="correo" 
+                                                       th:field="*{correo}"
+                                                       required="true"
+                                                       placeholder="Digite el correo electronico" 
+                                                       style="background-color: lightblue">
+                                            </div>
+                                            <div class="mb-3">
+                                                <label for="telefono">[[#{telefono.cliente}]]</label>
+                                                <input type="number" 
+                                                       class="form-control" 
+                                                       name="telefono" 
+                                                       th:field="*{telefono}"
+                                                       required="true"
+                                                       placeholder="Digite el numero de telefono" 
+                                                       style ="background-color: lightblue">
+                                            </div>
+
+                                            <div class="mb-3">
+                                                <label for="activo">[[#{cliente.activo}]]</label>
+                                                <input class="form-check-input" 
+                                                       type="checkbox" 
+                                                       name="activo" 
+                                                       id="activo"
+                                                       th:field="*{activo}">
+                                            </div>
+                                            <div class="mb-3">
+                                                <label for="imagen">[[#{registro.rutaImagen}]]</label>
+                                                <input class="form-control" 
+                                                       type="file" 
+                                                       name="imagenFile"
+                                                       onchange="readURL(this);" style ="background-color: lightblue"/>
+                                                <img id="blah" th:src="@{${cliente.rutaImagen}}" alt="your image" height="200"/>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                </form>
+            </div>
+        </div>
+    </section>
     <!-- AGREGAR EL >> 5 Fragmento que se utiliza en el fragmento anterior -->
+    <section th:fragment="botonesEditar">
+        <div class="container py-4 mb-4 bg-light">
+            <div class="row">
+                <div class="col-md-4 d-grid">
+                    <a th:href="@{/cliente/listado}" class="btn btn-primary">
+                        <i class="fas fa-arrow-left"></i> [[#{accion.regresar}]]
+                    </a>
+                </div>
+                <div class="col-md-4 d-grid">                                
+                    <a th:href="@{/cliente/eliminar/}+${cliente.idCliente}"
+                       class="btn btn-danger">
+                        <i class="fas fa-trash"></i> [[#{accion.eliminar}]]
+                    </a>
+                </div>
+                <div class="col-md-4 d-grid">
+                    <button type="submit" class="btn btn-success">
+                        <i class="fas fa-check"></i> [[#{accion.guardar}]]
+                    </button>
+                </div>
+            </div>
+        </div>
+    </section>
 
 
 </body>

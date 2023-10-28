@@ -1,16 +1,10 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Interface.java to edit this template
- */
+
 package com.CarWashGrupo6.service;
 
 import com.CarWashGrupo6.domain.Cliente;
 import java.util.List;
 
-/**
- *
- * @author Vivian
- */
+
 //sera como el MENU de nosotros, nos permite conectarse
 //con las otras cetegorias
 //vamos a tener metodos de salvar/ eliminar/ buscar categorias
@@ -25,7 +19,7 @@ public interface ClienteService {
     public List<Cliente> getClientes(boolean activos);
 
     //RETORNA UNA Cliente POR ID
-    public Cliente getCategoria(Cliente cliente);
+    public Cliente getCliente(Cliente cliente);
 
     //SE INSERTA UN NUEVO REGISTRO SI EL ID DE LA Cliente ESTA VACIO
     //SE ACTUALIZA EL REGISTRO SI EL ID DE LA cliente NO ESTA VACIO

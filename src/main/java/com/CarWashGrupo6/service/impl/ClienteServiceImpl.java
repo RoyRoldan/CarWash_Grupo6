@@ -41,7 +41,6 @@ public class ClienteServiceImpl implements ClienteService {
     //METODO QUE RETORNA UNA SOLA LISTA***
     // @Override
     public Cliente getCliente(Cliente cliente) {
-
         return clienteDao.findById(cliente.getIdCliente()).orElse(null);
 
     }
@@ -60,9 +59,6 @@ public class ClienteServiceImpl implements ClienteService {
         clienteDao.delete(cliente);
     }
 
-    @Override
-    public Cliente getCategoria(Cliente cliente) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
-    }
+    
 
 }
